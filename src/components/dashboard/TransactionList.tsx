@@ -73,19 +73,19 @@ const TransactionList = () => {
 
   return (
     <>
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Expenses Section */}
         <Card className="card-shadow">
-          <CardHeader className="pb-4">
-            <CardTitle className="font-display text-lg flex items-center gap-2">
-              <div className="p-2 rounded-lg bg-expense/10">
-                <ArrowUpCircle className="w-5 h-5 text-expense" />
+          <CardHeader className="pb-3 sm:pb-4">
+            <CardTitle className="font-display text-base sm:text-lg flex items-center gap-2">
+              <div className="p-1.5 sm:p-2 rounded-lg bg-expense/10 flex-shrink-0">
+                <ArrowUpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-expense" />
               </div>
-              Expenses
+              <span className="truncate">Expenses</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-          <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+          <CardContent className="px-3 sm:px-6">
+          <div className="space-y-2 max-h-80 overflow-y-auto pr-1 sm:pr-2">
             {sortedExpenses.length === 0 ? (
               <p className="text-center text-muted-foreground py-8">
                   No expenses recorded
@@ -134,16 +134,16 @@ const TransactionList = () => {
 
         {/* Income Section */}
         <Card className="card-shadow">
-          <CardHeader className="pb-4">
-            <CardTitle className="font-display text-lg flex items-center gap-2">
-              <div className="p-2 rounded-lg bg-income/10">
-                <ArrowDownCircle className="w-5 h-5 text-income" />
+          <CardHeader className="pb-3 sm:pb-4">
+            <CardTitle className="font-display text-base sm:text-lg flex items-center gap-2">
+              <div className="p-1.5 sm:p-2 rounded-lg bg-income/10 flex-shrink-0">
+                <ArrowDownCircle className="w-4 h-4 sm:w-5 sm:h-5 text-income" />
               </div>
-              Income
+              <span className="truncate">Income</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-          <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+          <CardContent className="px-3 sm:px-6">
+          <div className="space-y-2 max-h-80 overflow-y-auto pr-1 sm:pr-2">
             {sortedIncome.length === 0 ? (
               <p className="text-center text-muted-foreground py-8">
                   No income recorded

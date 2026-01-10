@@ -129,38 +129,38 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-3 sm:p-4">
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-4 left-4 z-10"
+        className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10"
         onClick={() => navigate('/')}
       >
         <ArrowLeft className="w-5 h-5" />
       </Button>
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
       </div>
       
       <Card className="w-full max-w-md animate-scale-in card-shadow relative">
-        <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-20 h-20 flex items-center justify-center">
+        <CardHeader className="text-center space-y-3 sm:space-y-4 px-4 sm:px-6">
+          <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
             <img src={paisaVaultLogo} alt="Paisa Vault" className="w-full h-full object-contain" />
           </div>
           <div>
-            <CardTitle className="text-2xl font-display">
+            <CardTitle className="text-xl sm:text-2xl font-display">
               {getTitle()}
             </CardTitle>
-            <CardDescription className="mt-2">
+            <CardDescription className="mt-1 sm:mt-2 text-xs sm:text-sm">
               {getDescription()}
             </CardDescription>
           </div>
         </CardHeader>
         
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <CardContent className="px-4 sm:px-6">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {mode === 'signup' && (
               <div className="space-y-2">
                 <Label htmlFor="displayName">Your Name</Label>

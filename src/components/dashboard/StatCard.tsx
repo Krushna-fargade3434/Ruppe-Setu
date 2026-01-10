@@ -23,22 +23,22 @@ const StatCard = ({ title, value, icon, trend, variant = 'default', className }:
   return (
     <div
       className={cn(
-        'rounded-xl p-5 card-shadow transition-all hover:shadow-card-lg',
+        'rounded-xl p-4 sm:p-5 card-shadow transition-all hover:shadow-card-lg',
         gradientClass,
         isColored ? 'text-white' : 'bg-card',
         className
       )}
     >
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1 flex-1 min-w-0">
           <p className={cn(
-            'text-sm font-medium',
+            'text-xs sm:text-sm font-medium',
             isColored ? 'text-white/80' : 'text-muted-foreground'
           )}>
             {title}
           </p>
           <p className={cn(
-            'text-2xl font-display font-bold tracking-tight',
+            'text-xl sm:text-2xl font-display font-bold tracking-tight break-words',
             isColored ? 'text-white' : 'text-foreground'
           )}>
             {value}
@@ -53,7 +53,7 @@ const StatCard = ({ title, value, icon, trend, variant = 'default', className }:
           )}
         </div>
         <div className={cn(
-          'p-2.5 rounded-lg',
+          'p-2 sm:p-2.5 rounded-lg flex-shrink-0',
           isColored ? 'bg-white/20' : 'bg-primary/10'
         )}>
           {icon}

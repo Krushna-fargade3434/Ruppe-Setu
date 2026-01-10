@@ -40,20 +40,22 @@ const Dashboard = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-8 space-y-8">
+      <main className="container py-4 sm:py-8 space-y-6 sm:space-y-8 px-3 sm:px-4">
         {/* Welcome & Actions */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col gap-4">
           <div>
-            <h2 className="text-2xl font-display font-bold">Dashboard</h2>
-            <p className="text-muted-foreground">
+            <h2 className="text-xl sm:text-2xl font-display font-bold">Dashboard</h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">
               {format(new Date(), 'EEEE, MMMM d, yyyy')}
             </p>
           </div>
-          <QuickActions />
+          <div className="w-full">
+            <QuickActions />
+          </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
           <StatCard
             title="Total Expenses"
             value={`₹${totalExpenses.toFixed(2)}`}
