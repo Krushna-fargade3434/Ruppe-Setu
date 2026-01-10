@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Student Expense Tracker Design System
+   Fresh mint/teal palette - modern, clean, approachable
+*/
+
+@layer base {
+  :root {
+    /* Core palette - Mint & Teal theme */
+    --background: 150 20% 98%;
+    --foreground: 160 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 30% 15%;
+
+    /* Primary - Fresh Mint */
+    --primary: 158 64% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft Teal */
+    --secondary: 158 30% 94%;
+    --secondary-foreground: 158 64% 32%;
+
+    --muted: 150 15% 95%;
+    --muted-foreground: 160 10% 45%;
+
+    /* Accent - Warm Coral for CTAs */
+    --accent: 12 80% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 20% 90%;
+    --input: 150 20% 90%;
+    --ring: 158 64% 42%;
+
+    --radius: 0.75rem;
+
+    /* Custom colors for finance */
+    --income: 142 70% 45%;
+    --income-foreground: 0 0% 100%;
+    --expense: 0 72% 55%;
+    --expense-foreground: 0 0% 100%;
+    --balance: 200 80% 50%;
+    --balance-foreground: 0 0% 100%;
+
+    /* Category colors */
+    --category-food: 25 95% 55%;
+    --category-travel: 200 80% 50%;
+    --category-study: 270 60% 55%;
+    --category-personal: 330 70% 55%;
+    --category-other: 160 10% 50%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(160 30% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(160 30% 15% / 0.08), 0 2px 4px -2px hsl(160 30% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(160 30% 15% / 0.1), 0 4px 6px -4px hsl(160 30% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(160 30% 15% / 0.1), 0 8px 10px -6px hsl(160 30% 15% / 0.05);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(158 64% 42%), hsl(170 60% 45%));
+    --gradient-income: linear-gradient(135deg, hsl(142 70% 45%), hsl(158 64% 42%));
+    --gradient-expense: linear-gradient(135deg, hsl(0 72% 55%), hsl(12 80% 62%));
+    --gradient-balance: linear-gradient(135deg, hsl(200 80% 50%), hsl(220 70% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(158 64% 42% / 0.1), hsl(170 60% 45% / 0.05));
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 158 64% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 158 30% 94%;
+    --sidebar-accent-foreground: 158 64% 32%;
+    --sidebar-border: 150 20% 90%;
+    --sidebar-ring: 158 64% 42%;
+  }
+
+  .dark {
+    --background: 160 30% 8%;
+    --foreground: 150 20% 95%;
+
+    --card: 160 25% 12%;
+    --card-foreground: 150 20% 95%;
+
+    --popover: 160 25% 12%;
+    --popover-foreground: 150 20% 95%;
+
+    --primary: 158 64% 50%;
+    --primary-foreground: 160 30% 8%;
+
+    --secondary: 160 25% 18%;
+    --secondary-foreground: 158 50% 70%;
+
+    --muted: 160 20% 15%;
+    --muted-foreground: 150 15% 60%;
+
+    --accent: 12 80% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 20% 20%;
+    --input: 160 20% 20%;
+    --ring: 158 64% 50%;
+
+    --income: 142 65% 50%;
+    --expense: 0 65% 50%;
+    --balance: 200 75% 55%;
+
+    --sidebar-background: 160 25% 10%;
+    --sidebar-foreground: 150 20% 90%;
+    --sidebar-primary: 158 64% 50%;
+    --sidebar-primary-foreground: 160 30% 8%;
+    --sidebar-accent: 160 25% 18%;
+    --sidebar-accent-foreground: 158 50% 70%;
+    --sidebar-border: 160 20% 20%;
+    --sidebar-ring: 158 64% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    @apply bg-card/80 backdrop-blur-md;
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-shadow-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-income {
+    background: var(--gradient-income);
+  }
+
+  .gradient-expense {
+    background: var(--gradient-expense);
+  }
+
+  .gradient-balance {
+    background: var(--gradient-balance);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
