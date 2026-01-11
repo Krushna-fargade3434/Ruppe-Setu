@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header';
 import StatCard from '@/components/dashboard/StatCard';
 import QuickActions from '@/components/dashboard/QuickActions';
 import TransactionList from '@/components/dashboard/TransactionList';
+import LendBorrowNotebook from '@/components/dashboard/LendBorrowNotebook';
 import { useFinanceData } from '@/hooks/useFinanceData';
 import { Skeleton } from '@/components/ui/skeleton';
 import { format } from 'date-fns';
@@ -69,6 +70,9 @@ const Dashboard = () => {
             trend={format(new Date(), 'MMMM yyyy')}
           />
         </div>
+
+        {/* Lend & Borrow Notebook */}
+        <LendBorrowNotebook />
 
         {/* Transaction List */}
         <TransactionList />
