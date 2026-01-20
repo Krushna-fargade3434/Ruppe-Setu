@@ -1,4 +1,4 @@
-import { LogOut, Download } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import defaultAvatar from '@/assets/default-image.png';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,11 +10,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/useAuth';
-import { useInstallPrompt } from '@/hooks/useInstallPrompt';
 
 const Header = () => {
   const { user, signOut } = useAuth();
-  const { isInstallable, promptInstall } = useInstallPrompt();
   const displayName = user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'User';
 
   return (
@@ -30,59 +28,36 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {isInstallable && (
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="hidden sm:flex gap-2"
-              onClick={promptInstall}
-            >
-              <Download className="w-4 h-4" />
-              Install App
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="gap-2 px-2 sm:px-4">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <img src={defaultAvatar} alt="Profile" className="w-full h-full object-cover" />
+              </div>
+              <span className="hidden sm:inline text-sm whitespace-nowrap">
+                {displayName}
+              </span>
             </Button>
-          )}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="gap-2 px-2 sm:px-4">
-                <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                  <img src={defaultAvatar} alt="Profile" className="w-full h-full object-cover" />
-                </div>
-                <span className="hidden sm:inline text-sm whitespace-nowrap">
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48 sm:w-56">
+            <DropdownMenuLabel>
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium">My Account</span>
+                <span className="text-xs font-normal text-muted-foreground">
                   {displayName}
                 </span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 sm:w-56">
-              <DropdownMenuLabel>
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm font-medium">My Account</span>
-                  <span className="text-xs font-normal text-muted-foreground">
-                    {displayName}
-                  </span>
-                  <span className="text-xs font-normal text-muted-foreground break-all">
-                    {user?.email}
-                  </span>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {isInstallable && (
-                <>
-                  <DropdownMenuItem onClick={promptInstall} className="sm:hidden">
-                    <Download className="w-4 h-4 mr-2" />
-                    Install App
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="sm:hidden" />
-                </>
-              )}
-              <DropdownMenuItem onClick={signOut} className="text-destructive">
-                <LogOut className="w-4 h-4 mr-2" />
-                Sign Out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+                <span className="text-xs font-normal text-muted-foreground break-all">
+                  {user?.email}
+                </span>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={signOut} className="text-destructive">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );

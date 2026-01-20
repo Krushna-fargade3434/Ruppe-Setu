@@ -12,47 +12,10 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       includeAssets: ["paisa-vault-logo.png"],
-      devOptions: {
-        enabled: true,
-      },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         navigateFallback: "/index.html",
-        cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "google-fonts-cache",
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "gstatic-fonts-cache",
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-        ],
       },
       manifest: {
         name: "Paisa Vault",
@@ -78,21 +41,6 @@ export default defineConfig({
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
-          },
-        ],
-        screenshots: [
-          {
-            src: "/paisa-vault-logo.png",
-            sizes: "512x512",
-            type: "image/png",
-            form_factor: "wide",
-            label: "Paisa Vault Dashboard",
-          },
-          {
-            src: "/paisa-vault-logo.png",
-            sizes: "512x512",
-            type: "image/png",
-            label: "Paisa Vault Mobile",
           },
         ],
       },
