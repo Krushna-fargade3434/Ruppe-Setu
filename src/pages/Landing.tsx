@@ -5,6 +5,8 @@ import { ArrowRight, Shield, TrendingUp, PiggyBank, Wallet } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth';
 import { Loader2 } from 'lucide-react';
 
+const paisaVaultLogo = '/paisa-vault-logo.png';
+
 const Landing = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
@@ -40,7 +42,7 @@ const Landing = () => {
         {/* Header */}
         <header className="flex items-center justify-between mb-8 sm:mb-12 lg:mb-16 gap-4">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <img src="/paisa-vault-logo.png" alt="Paisa Vault" className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0" />
+            <img src={paisaVaultLogo} alt="Paisa Vault" className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0" />
             <span className="font-display font-bold text-lg sm:text-xl truncate">Paisa Vault</span>
           </div>
           <Button onClick={() => navigate('/auth')} variant="outline" className="text-xs sm:text-sm px-3 sm:px-4">
@@ -72,7 +74,7 @@ const Landing = () => {
           
           <div className="flex-1 flex justify-center w-full">
             <img 
-              src="/paisa-vault-logo.png" 
+              src={paisaVaultLogo} 
               alt="Paisa Vault Logo" 
               className="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-contain drop-shadow-2xl animate-fade-in"
             />

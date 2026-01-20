@@ -6,9 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Loader2, Sparkles, ArrowLeft, Home, Wallet, Eye, EyeOff } from 'lucide-react';
-import paisaVaultLogo from '@/assets/paisa-vault-logo.png';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
+
+const paisaVaultLogo = '/paisa-vault-logo.png';
 
 const DEMO_EMAIL = 'demo@student.com';
 const DEMO_PASSWORD = 'demo123';
@@ -165,7 +166,7 @@ const Auth = () => {
       <Card className="w-full max-w-md animate-scale-in card-shadow relative">
         <CardHeader className="text-center space-y-3 sm:space-y-4 px-4 sm:px-6">
           <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
-            <img src="/paisa-vault-logo.png" alt="Paisa Vault" className="w-full h-full object-contain" />
+            <img src={paisaVaultLogo} alt="Paisa Vault" className="w-full h-full object-contain" />
           </div>
           <div>
             <CardTitle className="text-xl sm:text-2xl font-display">
@@ -303,14 +304,18 @@ const Auth = () => {
                   type="button"
                   variant="outline"
                   className="w-full gap-2"
-                  onClick={() => {
-                    setEmail(DEMO_EMAIL);
-                    setPassword(DEMO_PASSWORD);
-                    setDisplayName('Demo Student');
+                  disabled={loading}
+                  onClick={async () => {
+                    setLoading(true);
+                    const { error } = await signIn(DEMO_EMAIL, DEMO_PASSWORD);
+                    if (error) {
+                      setErrors({ form: error.message });
+                      setLoading(false);
+                    }
                   }}
                 >
                   <Sparkles className="w-4 h-4" />
-                  Fill Demo Credentials
+                  Login as Demo User
                 </Button>
               </>
             )}

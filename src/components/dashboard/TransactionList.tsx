@@ -4,6 +4,13 @@ import { ArrowDownCircle, ArrowUpCircle, Trash2, Pencil } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useFinanceData } from '@/hooks/useFinanceData';
 import {
   Dialog,
@@ -11,7 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Income, Expense } from '@/types/finance';
+import { Income, Expense, ExpenseCategory } from '@/types/finance';
 
 const TransactionList = () => {
   const { incomeData, expenseData, deleteIncome, deleteExpense, updateIncome, updateExpense } = useFinanceData();
@@ -21,6 +28,7 @@ const TransactionList = () => {
   const [editAmount, setEditAmount] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [editDate, setEditDate] = useState('');
+  const [editCategory, setEditCategory] = useState<ExpenseCategory>('Other');
   const [editSource, setEditSource] = useState('');
 
   // Sort by date descending
@@ -203,6 +211,21 @@ const TransactionList = () => {
               value={editAmount}
               onChange={(e) => setEditAmount(e.target.value)}
             />
+            <Select
+              value={editCategory}
+              onValueChange={(value: ExpenseCategory) => setEditCategory(value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Food">Food</SelectItem>
+                <SelectItem value="Travel">Travel</SelectItem>
+                <SelectItem value="Study">Study</SelectItem>
+                <SelectItem value="Personal">Personal</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
             <Input
               type="date"
               value={editDate}

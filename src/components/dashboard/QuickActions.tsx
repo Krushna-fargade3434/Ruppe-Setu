@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useFinanceData } from '@/hooks/useFinanceData';
+import { ExpenseCategory } from '@/types/finance';
 
 const QuickActions = () => {
   const [incomeOpen, setIncomeOpen] = useState(false);
@@ -34,10 +35,16 @@ const QuickActions = () => {
     date: new Date().toISOString().split('T')[0],
   });
 
-  const [expenseForm, setExpenseForm] = useState({
+  const [expenseForm, setExpenseForm] = useState<{
+    amount: string;
+    description: string;
+    date: string;
+    category: ExpenseCategory;
+  }>({
     amount: '',
     description: '',
     date: new Date().toISOString().split('T')[0],
+    category: 'Other',
   });
 
   const handleAddIncome = (e: React.FormEvent) => {
@@ -66,7 +73,7 @@ const QuickActions = () => {
     
     addExpense({
       amount: parseFloat(expenseForm.amount),
-      category: 'Other',
+      category: expenseForm.category,
       description: expenseForm.description,
       date: expenseForm.date,
     });
@@ -75,6 +82,7 @@ const QuickActions = () => {
       amount: '',
       description: '',
       date: new Date().toISOString().split('T')[0],
+      category: 'Other',
     });
     setExpenseOpen(false);
   };
@@ -183,6 +191,24 @@ const QuickActions = () => {
                 onChange={(e) => setExpenseForm({ ...expenseForm, amount: e.target.value })}
                 required
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="expense-category">Category</Label>
+              <Select
+                value={expenseForm.category}
+                onValueChange={(value: ExpenseCategory) => setExpenseForm({ ...expenseForm, category: value })}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Food">Food</SelectItem>
+                  <SelectItem value="Travel">Travel</SelectItem>
+                  <SelectItem value="Study">Study</SelectItem>
+                  <SelectItem value="Personal">Personal</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="expense-date">Date</Label>

@@ -120,11 +120,12 @@ export const useFinanceData = () => {
 
   // Update expense
   const updateExpenseMutation = useMutation({
-    mutationFn: async ({ id, amount, description, date }: { id: string; amount: number; description?: string; date: string }) => {
+    mutationFn: async ({ id, amount, category, description, date }: { id: string; amount: number; category?: ExpenseCategory; description?: string; date: string }) => {
       const { data, error } = await supabase
         .from('expenses')
         .update({
           amount,
+          category: category || undefined,
           description: description || null,
           date,
         })
