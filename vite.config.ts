@@ -13,7 +13,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      includeAssets: ["paisa-vault-logo.png"],
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         name: "Paisa Vault",
         short_name: "PaisaVault",
