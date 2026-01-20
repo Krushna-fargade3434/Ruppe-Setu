@@ -17,6 +17,13 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        navigateFallback: "/index.html",
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
+      },
       manifest: {
         name: "Paisa Vault",
         short_name: "PaisaVault",
