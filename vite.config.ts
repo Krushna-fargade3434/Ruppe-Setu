@@ -13,32 +13,32 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "prompt",
-      includeAssets: ["paisa-vault-logo.png"],
+      includeAssets: ["Ruppe-setu-logo.png"],
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         navigateFallback: "/index.html",
       },
       manifest: {
-        name: "Paisa Vault",
-        short_name: "PaisaVault",
+        name: "Rupee-Setu",
+        short_name: "Rupee-Setu",
         description: "Your personal expense and income tracker",
         theme_color: "#2CA87F",
         background_color: "#ffffff",
         display: "standalone",
         scope: "/",
         start_url: "/",
-        id: "paisa-vault",
+        id: "rupee-setu",
         orientation: "portrait",
         categories: ["finance", "productivity", "utilities"],
         icons: [
           {
-            src: "/paisa-vault-logo.png",
+            src: "/Ruppe-setu-logo.png",
             sizes: "192x192",
             type: "image/png",
             purpose: "any maskable",
           },
           {
-            src: "/paisa-vault-logo.png",
+            src: "/Ruppe-setu-logo.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",

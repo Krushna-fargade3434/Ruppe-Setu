@@ -1,10 +1,10 @@
-# Paisa Vault
+# Rupee-Setu
 
 **Your Money, Your Control** - A modern personal finance tracker for students
 
 ## About
 
-Paisa Vault is a web-based expense and income tracking application designed specifically for students. Built with React, TypeScript, and Supabase, it provides a simple and intuitive interface to manage your finances.
+Rupee-Setu is a web-based expense and income tracking application designed specifically for students. Built with React, TypeScript, and Supabase, it provides a simple and intuitive interface to manage your finances.
 
 ## Features
 

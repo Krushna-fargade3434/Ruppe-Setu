@@ -5,7 +5,7 @@ import defaultAvatar from '@/assets/default-image.png';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 
-const paisaVaultLogo = '/paisa-vault-logo.png';
+const rupeeSetuLogo = '/Ruppe-setu-logo.png';
 
 import {
   DropdownMenu,
@@ -44,10 +44,10 @@ const Header = () => {
       <div className="container flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0">
-            <img src={paisaVaultLogo} alt="Paisa Vault" className="w-full h-full object-contain" />
+            <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-full h-full object-contain" />
           </div>
           <div className="min-w-0">
-            <h1 className="font-display font-bold text-base sm:text-lg leading-tight">Paisa Vault</h1>
+            <h1 className="font-display font-bold text-base sm:text-lg leading-tight">Rupee-Setu</h1>
             <p className="text-xs text-muted-foreground hidden xs:block">Your Money, Your Control</p>
           </div>
         </div>

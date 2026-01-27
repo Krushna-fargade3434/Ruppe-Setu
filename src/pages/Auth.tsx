@@ -5,14 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Loader2, Sparkles, ArrowLeft, Home, Wallet, Eye, EyeOff } from 'lucide-react';
+import { ArrowRight, Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
 
-const paisaVaultLogo = '/paisa-vault-logo.png';
-
-const DEMO_EMAIL = 'demo@student.com';
-const DEMO_PASSWORD = 'demo123';
+const rupeeSetuLogo = '/Ruppe-setu-logo.png';
 
 const authSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -184,7 +181,7 @@ const Auth = () => {
       <Card className="w-full max-w-md animate-scale-in card-shadow relative">
         <CardHeader className="text-center space-y-3 sm:space-y-4 px-4 sm:px-6">
           <div className="mx-auto w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
-            <img src={paisaVaultLogo} alt="Paisa Vault" className="w-full h-full object-contain" />
+            <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-full h-full object-contain" />
           </div>
           <div>
             <CardTitle className="text-xl sm:text-2xl font-display">
@@ -305,37 +302,6 @@ const Auth = () => {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Sign In
               </Button>
-            )}
-
-            {mode !== 'forgot' && (
-              <>
-                <div className="relative my-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-card px-2 text-muted-foreground">or try demo</span>
-                  </div>
-                </div>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full gap-2"
-                  disabled={loading}
-                  onClick={async () => {
-                    setLoading(true);
-                    const { error } = await signIn(DEMO_EMAIL, DEMO_PASSWORD);
-                    if (error) {
-                      setErrors({ form: error.message });
-                      setLoading(false);
-                    }
-                  }}
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Login as Demo User
-                </Button>
-              </>
             )}
           </form>
           

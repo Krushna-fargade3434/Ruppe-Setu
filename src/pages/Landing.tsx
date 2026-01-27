@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, TrendingUp, PiggyBank, Wallet } from 'lucide-react';
+import { ArrowRight, Shield, TrendingUp, PiggyBank } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Loader2 } from 'lucide-react';
 
-const paisaVaultLogo = '/paisa-vault-logo.png';
+const rupeeSetuLogo = '/Ruppe-setu-logo.png';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -36,109 +36,152 @@ const Landing = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-6 sm:py-8">
-        {/* Header */}
-        <header className="flex items-center justify-between mb-8 sm:mb-12 lg:mb-16 gap-4">
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <img src={paisaVaultLogo} alt="Paisa Vault" className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0" />
-            <span className="font-display font-bold text-lg sm:text-xl truncate">Paisa Vault</span>
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl opacity-50" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-secondary/30 rounded-full blur-3xl opacity-50" />
+      </div>
+
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 hover:opacity-80 transition-opacity cursor-pointer" onClick={() => navigate('/')}>
+            <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-8 h-8 sm:w-10 sm:h-10 object-contain flex-shrink-0" />
+            <span className="font-display font-bold text-lg sm:text-xl truncate">Rupee-Setu</span>
           </div>
-          <Button onClick={() => navigate('/auth')} variant="outline" className="text-xs sm:text-sm px-3 sm:px-4">
+          <Button onClick={() => navigate('/auth')} variant="outline" className="text-xs sm:text-sm px-4 hover:bg-primary hover:text-primary-foreground transition-colors duration-300">
             Sign In
           </Button>
-        </header>
+        </div>
+      </header>
 
+      <div className="container mx-auto px-4">
         {/* Main Hero */}
-        <main className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 py-6 sm:py-12">
-          <div className="flex-1 text-center lg:text-left">
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+        <main className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 py-12 sm:py-20 lg:py-24">
+          <div className="flex-1 text-center lg:text-left space-y-6 animate-slide-up">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
               Your Money,
               <br />
-              <span className="text-primary">Your Control</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-600">
+                Your Control
+              </span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">
-              Track your expenses and income effortlessly. Paisa Vault helps you take charge of your finances with simple, intuitive tools.
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              Track your expenses and income effortlessly. Rupee-Setu helps you take charge of your finances with simple, intuitive tools designed for modern life.
             </p>
-            <div className="flex flex-col gap-3 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
               <Button 
                 size="lg" 
                 onClick={() => navigate('/auth')}
-                className="gap-2 text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto justify-center sm:justify-start"
+                className="gap-2 text-base h-12 px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1"
               >
-                Get Started <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                Get Started <ArrowRight className="w-5 h-5" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => {
+                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-base h-12 px-8 hover:bg-secondary transition-all duration-300"
+              >
+                Learn More
               </Button>
             </div>
           </div>
           
-          <div className="flex-1 flex justify-center w-full">
+          <div className="flex-1 flex justify-center w-full relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl transform scale-75 animate-pulse" />
             <img 
-              src={paisaVaultLogo} 
-              alt="Paisa Vault Logo" 
-              className="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 object-contain drop-shadow-2xl animate-fade-in"
+              src={rupeeSetuLogo} 
+              alt="Rupee-Setu Logo" 
+              className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain drop-shadow-2xl animate-float z-10"
             />
           </div>
         </main>
 
         {/* Features */}
-        <section className="py-8 sm:py-12 lg:py-16">
-          <h2 className="font-display text-2xl sm:text-2xl md:text-3xl font-bold text-center mb-8 sm:mb-12">
-            Why Choose Paisa Vault?
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            <div className="bg-card p-4 sm:p-6 rounded-2xl shadow-lg text-center">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 bg-primary/10 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+        <section id="features" className="py-16 sm:py-24">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold">
+              Why Choose Rupee-Setu?
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Everything you need to manage your personal finances effectively.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group bg-card p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-primary/20 hover:-translate-y-1">
+              <div className="w-14 h-14 mb-6 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <TrendingUp className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-display font-semibold text-base sm:text-lg mb-2">Track Expenses</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                Log your daily expenses quickly and see where your money goes.
+              <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-primary transition-colors">Track Expenses</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Log your daily expenses quickly and visualize where your money goes with intuitive charts.
               </p>
             </div>
-            <div className="bg-card p-4 sm:p-6 rounded-2xl shadow-lg text-center">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 bg-income/10 rounded-xl flex items-center justify-center">
-                <PiggyBank className="w-6 h-6 sm:w-7 sm:h-7 text-income" />
+
+            <div className="group bg-card p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-income/20 hover:-translate-y-1">
+              <div className="w-14 h-14 mb-6 bg-income/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <PiggyBank className="w-7 h-7 text-income" />
               </div>
-              <h3 className="font-display font-semibold text-base sm:text-lg mb-2">Monitor Income</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                Keep track of all your income sources in one place.
+              <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-income transition-colors">Monitor Income</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Keep track of all your income sources in one place and manage your budget effectively.
               </p>
             </div>
-            <div className="bg-card p-4 sm:p-6 rounded-2xl shadow-lg text-center sm:col-span-2 md:col-span-1">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4 bg-expense/10 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-expense" />
+
+            <div className="group bg-card p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-expense/20 hover:-translate-y-1">
+              <div className="w-14 h-14 mb-6 bg-expense/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Shield className="w-7 h-7 text-expense" />
               </div>
-              <h3 className="font-display font-semibold text-base sm:text-lg mb-2">Secure & Private</h3>
-              <p className="text-xs sm:text-sm text-muted-foreground">
-                Your financial data is encrypted and only accessible by you.
+              <h3 className="font-display font-semibold text-xl mb-3 group-hover:text-expense transition-colors">Secure & Private</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Your financial data is encrypted locally and stored securely. We prioritize your privacy.
               </p>
             </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-8 sm:py-12 lg:py-16 text-center">
-          <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-3xl p-6 sm:p-10 lg:p-12">
-            <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
-              Ready to take control of your finances?
-            </h2>
-            <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-6 sm:mb-8">
-              Start tracking your expenses today. It's free!
-            </p>
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/auth')}
-              className="gap-2 text-lg px-8"
-            >
-              Get Started Free <ArrowRight className="w-5 h-5" />
-            </Button>
+        <section className="py-16 sm:py-24 mb-16">
+          <div className="relative overflow-hidden bg-gradient-to-r from-primary to-emerald-600 rounded-[2.5rem] p-8 sm:p-12 lg:p-16 text-center text-white shadow-2xl">
+            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            
+            <div className="relative z-10 space-y-6 max-w-3xl mx-auto">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold">
+                Ready to take control of your finances?
+              </h2>
+              <p className="text-primary-foreground/90 text-lg sm:text-xl">
+                Join thousands of users who are already managing their money better. It's completely free.
+              </p>
+              <div className="pt-4">
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/auth')}
+                  variant="secondary"
+                  className="gap-2 text-lg h-14 px-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 font-semibold text-primary"
+                >
+                  Get Started Free <ArrowRight className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Footer */}
         <footer className="py-8 text-center text-muted-foreground text-sm border-t">
-          <p>© 2026 Paisa Vault. Your Money, Your Control.</p>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-6 h-6 object-contain" />
+              <span className="font-display font-bold">Rupee-Setu</span>
+            </div>
+            <p>© 2026 Rupee-Setu. Your Money, Your Control.</p>
+          </div>
         </footer>
       </div>
     </div>

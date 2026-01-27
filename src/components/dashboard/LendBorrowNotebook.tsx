@@ -44,7 +44,7 @@ interface LendBorrowEntry {
   settledDate?: string;
 }
 
-const STORAGE_KEY = 'paisa-vault-lend-borrow';
+const STORAGE_KEY = 'rupee-setu-lend-borrow';
 
 // Helper function to get entries from localStorage
 const getStoredEntries = (userId: string): LendBorrowEntry[] => {
