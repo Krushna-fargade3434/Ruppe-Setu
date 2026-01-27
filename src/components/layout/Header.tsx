@@ -1,4 +1,4 @@
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import defaultAvatar from '@/assets/default-image.png';
@@ -21,6 +21,7 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const displayName = user?.user_metadata?.display_name || user?.email?.split('@')[0] || 'User';
+  const avatarUrl = user?.user_metadata?.avatar_url || defaultAvatar;
 
   const handleSignOut = async () => {
     try {
@@ -56,11 +57,11 @@ const Header = () => {
           <InstallPrompt />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="gap-2 px-2 sm:px-4">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                <img src={defaultAvatar} alt="Profile" className="w-full h-full object-cover" />
+            <Button variant="ghost" className="gap-2 px-1 sm:px-2 h-auto py-1 hover:bg-transparent">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/20 transition-all hover:border-primary">
+                <img src={avatarUrl} alt="Profile" className="w-full h-full object-cover" />
               </div>
-              <span className="hidden sm:inline text-sm whitespace-nowrap">
+              <span className="hidden sm:inline text-sm font-medium whitespace-nowrap px-1">
                 {displayName}
               </span>
             </Button>
@@ -78,7 +79,11 @@ const Header = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+            <DropdownMenuItem onClick={() => navigate('/profile')} className="cursor-pointer">
+              <User className="w-4 h-4 mr-2" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
             </DropdownMenuItem>

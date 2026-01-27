@@ -10,6 +10,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
+  updateProfile: (data: { displayName?: string; avatarUrl?: string }) => Promise<{ error: Error | null }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -93,8 +94,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { error: error as Error | null };
   };
 
+  const updateProfile = async ({ displayName, avatarUrl }: { displayName?: string; avatarUrl?: string }) => {
+    const updates: { data: { display_name?: string; avatar_url?: string } } = {
+      data: {},
+    };
+
+    if (displayName) updates.data.display_name = displayName;
+    if (avatarUrl) updates.data.avatar_url = avatarUrl;
+
+    const { error } = await supabase.auth.updateUser(updates);
+    
+    if (!error) {
+      // Manually update local state to reflect changes immediately
+      const { data: { user: updatedUser } } = await supabase.auth.getUser();
+      setUser(updatedUser);
+    }
+    
+    return { error: error as Error | null };
+  };
+
   return (
-    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut, resetPassword }}>
+    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut, resetPassword, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );
