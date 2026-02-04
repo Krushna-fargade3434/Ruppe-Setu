@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ReloadPrompt } from "@/components/pwa/ReloadPrompt";
+import { UpdateNotification } from "@/components/pwa/UpdateNotification";
 import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -20,6 +21,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <ReloadPrompt />
+        <UpdateNotification />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Landing />} />

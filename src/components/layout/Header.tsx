@@ -4,6 +4,7 @@ import { InstallPrompt } from '@/components/pwa/InstallPrompt';
 import defaultAvatar from '@/assets/default-image.png';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
+import { APP_VERSION } from '@/lib/version';
 
 const rupeeSetuLogo = '/Ruppe-setu-logo.png';
 
@@ -87,6 +88,10 @@ const Header = () => {
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <div className="px-2 py-1.5">
+              <p className="text-xs text-muted-foreground text-center">v{APP_VERSION}</p>
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
         </div>
