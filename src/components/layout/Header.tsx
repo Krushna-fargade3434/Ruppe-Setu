@@ -1,12 +1,13 @@
 import { LogOut, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { InstallPrompt } from '@/components/pwa/InstallPrompt';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import defaultAvatar from '@/assets/default-image.png';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { APP_VERSION } from '@/lib/version';
 
-const rupeeSetuLogo = '/Ruppe-setu-logo.png';
+const rupeeSetuLogo = '/Rupee-setu-logo.png';
 
 import {
   DropdownMenu,
@@ -45,8 +46,8 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0">
-            <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-full h-full object-contain" />
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0 bg-white shadow-md">
+            <img src={rupeeSetuLogo} alt="Rupee-Setu" className="w-full h-full object-cover" />
           </div>
           <div className="min-w-0">
             <h1 className="font-display font-bold text-base sm:text-lg leading-tight">Rupee-Setu</h1>
@@ -56,6 +57,7 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <InstallPrompt />
+          <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="gap-2 px-1 sm:px-2 h-auto py-1 hover:bg-transparent">

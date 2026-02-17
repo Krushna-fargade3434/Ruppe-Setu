@@ -7,11 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeft, Save, Loader2, User, Image as ImageIcon, Smartphone, Info } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { ArrowLeft, Save, Loader2, User, Smartphone, Info, TrendingUp, Calendar, Shield, Mail } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import Header from '@/components/layout/Header';
 import MonthlyExpensesSummary from '@/components/dashboard/MonthlyExpensesSummary';
 import { APP_VERSION, APP_NAME } from '@/lib/version';
+import { format } from 'date-fns';
 
 const Profile = () => {
   const { user, updateProfile, loading: authLoading } = useAuth();
@@ -67,10 +70,14 @@ const Profile = () => {
 
   if (!user) return null;
 
+  const memberSince = user.created_at ? format(new Date(user.created_at), 'MMMM yyyy') : 'Recently';
+  const totalTransactions = expenseData.length;
+  const totalExpenses = expenseData.reduce((sum, exp) => sum + Number(exp.amount), 0);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container max-w-2xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
+      <div className="container max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <Button
           variant="ghost"
           className="mb-4 sm:mb-6 gap-2 text-sm sm:text-base"
@@ -80,7 +87,68 @@ const Profile = () => {
           Back to Dashboard
         </Button>
 
-        <Card className="card-shadow">
+        {/* Profile Header Card */}
+        <Card className="card-shadow mb-6">
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row items-center gap-6">
+              <Avatar className="w-24 h-24 sm:w-28 sm:h-28 border-4 border-background shadow-xl">
+                <AvatarImage src={avatarUrl} className="object-cover" />
+                <AvatarFallback className="text-3xl bg-primary/10 text-primary">
+                  {displayName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              
+              <div className="flex-1 text-center sm:text-left space-y-2">
+                <h1 className="text-2xl sm:text-3xl font-display font-bold">
+                  {displayName || 'User'}
+                </h1>
+                <p className="text-muted-foreground flex items-center gap-2 justify-center sm:justify-start">
+                  <Mail className="w-4 h-4" />
+                  {user.email}
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                  <Badge variant="secondary" className="gap-1">
+                    <Calendar className="w-3 h-3" />
+                    Member since {memberSince}
+                  </Badge>
+                  <Badge variant="outline" className="gap-1">
+                    <Shield className="w-3 h-3" />
+                    Verified Account
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Account Stats */}
+        <Card className="card-shadow mb-6">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              Your Activity
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-lg bg-muted/50 space-y-1">
+                <p className="text-xs text-muted-foreground">Total Transactions</p>
+                <p className="text-2xl font-bold">{totalTransactions}</p>
+              </div>
+              <div className="p-4 rounded-lg bg-muted/50 space-y-1">
+                <p className="text-xs text-muted-foreground">Total Expenses</p>
+                <p className="text-2xl font-bold text-expense">₹{totalExpenses.toFixed(0)}</p>
+              </div>
+              <div className="p-4 rounded-lg bg-muted/50 space-y-1 col-span-2 sm:col-span-1">
+                <p className="text-xs text-muted-foreground">Account Status</p>
+                <p className="text-2xl font-bold text-income">Active</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Profile Settings */}
+        <Card className="card-shadow mb-6">
           <CardHeader className="px-4 sm:px-6">
             <CardTitle className="text-lg sm:text-xl">Profile Settings</CardTitle>
             <CardDescription className="text-xs sm:text-sm">
@@ -89,22 +157,6 @@ const Profile = () => {
           </CardHeader>
           <CardContent className="px-4 sm:px-6">
             <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-              <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
-                <Avatar className="w-20 h-20 sm:w-24 sm:h-24 border-4 border-background shadow-lg">
-                  <AvatarImage src={avatarUrl} className="object-cover" />
-                  <AvatarFallback className="text-xl sm:text-2xl bg-primary/10 text-primary">
-                    {displayName?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                
-                <div className="flex-1 space-y-1 text-center sm:text-left">
-                  <h3 className="font-medium text-base sm:text-lg">Profile Picture</h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground">
-                    Choose a profile picture from the options below.
-                  </p>
-                </div>
-              </div>
-
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label className="text-sm sm:text-base">Choose Avatar</Label>
@@ -146,15 +198,21 @@ const Profile = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-sm sm:text-base">Email</Label>
-                  <Input
-                    value={user.email}
-                    disabled
-                    className="bg-muted text-muted-foreground text-sm sm:text-base h-10 sm:h-11"
-                  />
+                  <Label htmlFor="email" className="text-sm sm:text-base">Email Address</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      value={user.email}
+                      disabled
+                      className="pl-9 bg-muted text-muted-foreground text-sm sm:text-base h-10 sm:h-11"
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">Email cannot be changed</p>
                 </div>
               </div>
 
+              <Separator />
               <div className="flex justify-end pt-4">
                 <Button type="submit" disabled={loading} className="gradient-primary min-w-[120px] sm:min-w-[140px] h-10 sm:h-11 text-sm sm:text-base">
                   {loading ? (

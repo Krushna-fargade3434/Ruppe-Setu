@@ -93,9 +93,9 @@ const QuickActions = () => {
     <div className="flex flex-col xs:flex-row gap-2 xs:gap-3 w-full">
       <Dialog open={incomeOpen} onOpenChange={setIncomeOpen}>
         <DialogTrigger asChild>
-          <Button className="gradient-income hover:opacity-90 transition-opacity gap-2 w-full xs:w-auto">
+          <Button className="gradient-income hover:opacity-90 hover:scale-105 transition-all gap-2 w-full xs:w-auto shadow-lg">
             <ArrowDownCircle className="w-4 h-4" />
-            <span className="block xs:inline">Add Income</span>
+            <span className="block xs:inline font-semibold">Add Income</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">
@@ -168,9 +168,9 @@ const QuickActions = () => {
 
       <Dialog open={expenseOpen} onOpenChange={setExpenseOpen}>
         <DialogTrigger asChild>
-          <Button className="gradient-expense hover:opacity-90 transition-opacity gap-2 w-full xs:w-auto">
+          <Button className="gradient-expense hover:opacity-90 hover:scale-105 transition-all gap-2 w-full xs:w-auto shadow-lg">
             <ArrowUpCircle className="w-4 h-4" />
-            <span className="block xs:inline">Add Expense</span>
+            <span className="block xs:inline font-semibold">Add Expense</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">

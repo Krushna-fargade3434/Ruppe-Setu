@@ -1,17 +1,26 @@
-import { ArrowUpCircle, TrendingUp } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import StatCard from '@/components/dashboard/StatCard';
 import QuickActions from '@/components/dashboard/QuickActions';
 import TransactionList from '@/components/dashboard/TransactionList';
 import LendBorrowNotebook from '@/components/dashboard/LendBorrowNotebook';
 import { useFinanceData } from '@/hooks/useFinanceData';
+import { useAuth } from '@/hooks/useAuth';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ArrowUpCircle, TrendingUp } from 'lucide-react';
 import { format } from 'date-fns';
+
+const getGreeting = () => {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good Morning';
+  if (hour < 17) return 'Good Afternoon';
+  return 'Good Evening';
+};
 
 const Dashboard = () => {
   const { totalExpenses, isLoading, expenseData } = useFinanceData();
+  const { user } = useAuth();
 
-  // Calculate this month's data
+  // Calculate this month's expenses
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
   
@@ -26,8 +35,9 @@ const Dashboard = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container py-8">
-          <div className="grid gap-6 md:grid-cols-2">
+        <main className="container py-8 px-3 sm:px-4">
+          <Skeleton className="h-10 w-64 mb-6" />
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
             {[1, 2].map((i) => (
               <Skeleton key={i} className="h-32 rounded-xl" />
             ))}
@@ -42,21 +52,20 @@ const Dashboard = () => {
       <Header />
       
       <main className="container py-4 sm:py-8 space-y-6 sm:space-y-8 px-3 sm:px-4">
-        {/* Welcome & Actions */}
-        <div className="flex flex-col gap-4">
-          <div>
-            <h2 className="text-xl sm:text-2xl font-display font-bold">Dashboard</h2>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              {format(new Date(), 'EEEE, MMMM d, yyyy')}
-            </p>
-          </div>
-          <div className="w-full">
-            <QuickActions />
-          </div>
+        {/* Greeting */}
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+            {getGreeting()}, {user?.user_metadata?.display_name || 'User'}
+          </h1>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
+        {/* Quick Actions */}
+        <div className="w-full">
+          <QuickActions />
+        </div>
+
+        {/* Expense Stats */}
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
           <StatCard
             title="Total Expenses"
             value={`₹${totalExpenses.toFixed(2)}`}
@@ -64,7 +73,7 @@ const Dashboard = () => {
             variant="expense"
           />
           <StatCard
-            title="This Month"
+            title="This Month Expenses"
             value={`₹${thisMonthExpenses.toFixed(2)}`}
             icon={<TrendingUp className="w-5 h-5 text-primary" />}
             trend={format(new Date(), 'MMMM yyyy')}
